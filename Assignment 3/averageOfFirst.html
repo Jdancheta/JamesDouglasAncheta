@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Average (For Loop) of First N Natural Numbers</title>
+  </head>
+  <body>
+    <h1>Average of First N Natural Numbers</h1>
+    <div>
+      <label for="input-value">Average of First N Natural Numbers </label>
+      <input type="number" id="input-value" />
+      <button id="convert-button">Submit</button>
+    </div>
+    <h3>Answer:</h3>
+    <div><input type="text" id="output-value" readonly /></div>
+  </body>
+  <br />
+
+  <a href="../../index.html">Home</a>
+
+  <script>
+    const inputValue = document.getElementById('input-value')
+    const outputValue = document.getElementById('output-value')
+    const btnConvert = document.getElementById('convert-button')
+
+    btnConvert.addEventListener('click', () => {
+      const Number = parseInt(inputValue.value)
+      sum = 1
+      for (let i = 1; i <= Number; i++) {
+        if (i === Number) {
+          sum = (sum + i) / Number
+        } else {
+          sum += i
+        }
+      }
+      outputValue.value = sum
+    })
+  </script>
+</html>

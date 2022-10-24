@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Income Tax</title>
+  </head>
+  <body>
+    <h1>Income Tax</h1>
+    <div>
+      <label for="input-value">Income Tax:</label>
+      <input type="number" id="input-value" />
+      <button id="convert-button">Calculate</button>
+    </div>
+    <h3>Answer:</h3>
+    <div><input type="text" id="output-value" readonly /></div>
+  </body>
+  <br />
+
+  <a href="../index.html">Home</a>
+
+  <script>
+    const inputValue = document.getElementById('input-value')
+    const outputValue = document.getElementById('output-value')
+    const btnConvert = document.getElementById('convert-button')
+
+    function Calculate() {
+      const value = inputValue.value
+
+      if (value <= 250000) {
+        return 0
+      } else if (value > 250000 && value <= 400000) {
+        return (value - 250000) * 0.2
+      } else if (value > 400000 && value <= 800000) {
+        return (value - 400000) * 0.25 + 30000
+      } else if (value > 800000 && value <= 2000000) {
+        return (value - 800000) * 0.3 + 130000
+      } else if (value > 2000000 && value <= 8000000) {
+        return (value - 2000000) * 0.32 + 490000
+      } else {
+        return (value - 8000000) * 0.35 + 2410000
+      }
+    }
+    btnConvert.addEventListener('click', () => {
+      outputValue.value = `PHP: ${Calculate()}`
+    })
+  </script>
+</html>

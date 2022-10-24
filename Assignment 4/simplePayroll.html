@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <script defer src="https://kit.fontawesome.com/6914ea1ba2.js" crossorigin="anonymous"></script>
+    <title>Simple Payroll</title>
+  </head>
+  <body>
+    <h1>Simple Payroll</h1>
+    <div>
+      <label for="input-value-name">Employee Name:</label>
+      <input type="text" id="input-value-name" />
+      <label for="input-value-days">Days Worked:</label>
+      <input type="number" id="input-value-days" /> <label for="input-value-daily">Daily Rate:</label>
+      <input type="number" id="input-value-daily" /> <label for="input-value-deduction">Deduction Amount:</label>
+      <input type="number" id="input-value-deduction" />
+      <button id="add-button">Add</button>
+    </div>
+    <br />
+    <div>
+      <label for="input-value-index">Input Line No. to Delete:</label>
+
+      <input type="number" id="input-value-index" />
+      <button id="delete-button">Delete</button>
+    </div>
+    <br />
+    <table class="w3-table-all">
+      <thead>
+        <tr class="w3-red">
+          <th>No.</th>
+          <th>Employee Name</th>
+          <th>Days Worked</th>
+          <th>Daily Rate</th>
+          <th>Gross Pay</th>
+          <th>Deduction Amount</th>
+          <th>Net Pay</th>
+        </tr>
+      </thead>
+      <tbody id="output-value"></tbody>
+    </table>
+  </body>
+  <br />
+  <a href="../index.html">Home</a>
+  <script>
+    const inputValueName = document.getElementById('input-value-name')
+    const inputValueDays = document.getElementById('input-value-days')
+    const inputValueDaily = document.getElementById('input-value-daily')
+    const inputValueDeduction = document.getElementById('input-value-deduction')
+    const inputValueIndex = document.getElementById('input-value-index')
+    const outputValue = document.getElementById('output-value')
+    const btnAdd = document.getElementById('add-button')
+    const btnDelete = document.getElementById('delete-button')
+
+    let tableList = []
+
+    function addList() {
+      let list = {
+        name: inputValueName.value,
+        days: inputValueDays.value,
+        daily: inputValueDaily.value,
+        deduction: inputValueDeduction.value,
+      }
+
+      tableList.push(list)
+    }
+
+    function tableListItem() {
+      let tableBody = `<tbody>`
+      tableList.forEach((value, index) => {
+        tableBody += `<tr>
+        <td>${index}</td>
+        <td>${value.name}</td>
+        <td>${value.days}</td>
+        <td>${value.daily}</td>
+        <td>${parseInt(value.daily) * parseInt(value.days)}</td>
+        <td>${value.deduction}</td>
+        <td>${parseInt(value.days) * parseInt(value.daily) - parseInt(value.deduction)}</td>
+      </tr>`
+      })
+
+      return tableBody + '</tbody>'
+    }
+    btnAdd.addEventListener('click', () => {
+      addList()
+      outputValue.innerHTML = tableListItem()
+    })
+
+    btnDelete.addEventListener('click', () => {
+      if (confirm('Are you sure?')) {
+        tableList.splice(parseInt(inputValueIndex.value), 1)
+        outputValue.innerHTML = tableListItem()
+      }
+    })
+  </script>
+</html>
